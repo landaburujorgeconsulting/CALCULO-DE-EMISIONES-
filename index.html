@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventario de Emisiones GEI · Coop Agenda 20.30</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-mark">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" fill="rgba(168,213,181,0.15)" stroke="rgba(168,213,181,0.5)" stroke-width="1.5"/>
+        <path d="M32 14 C24 20, 16 26, 18 36 C20 46, 30 50, 32 50 C34 50, 44 46, 46 36 C48 26, 40 20, 32 14Z" fill="rgba(74,124,89,0.6)"/>
+        <path d="M32 22 C27 26, 22 30, 23 37 C24 44, 30 47, 32 47 C34 47, 40 44, 41 37 C42 30, 37 26, 32 22Z" fill="rgba(168,213,181,0.5)"/>
+        <circle cx="32" cy="35" r="5" fill="rgba(200,169,110,0.8)"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Inventario de <em>Emisiones GEI</em></h1>
+      <p>Formulario de carga · Alcances 1, 2 y 3 · Protocolo GHG · Coop Agenda 20.30</p>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <div class="step-pill active" onclick="goTo(0)" id="pill-0">
+      <span class="step-num">1</span> Datos generales
+    </div>
+    <div class="step-pill" onclick="goTo(1)" id="pill-1">
+      <span class="step-num">2</span> Alcance 1
+    </div>
+    <div class="step-pill" onclick="goTo(2)" id="pill-2">
+      <span class="step-num">3</span> Alcance 2
+    </div>
+    <div class="step-pill" onclick="goTo(3)" id="pill-3">
+      <span class="step-num">4</span> Alcance 3
+    </div>
+    <div class="step-pill" onclick="goTo(4)" id="pill-4">
+      <span class="step-num">5</span> Resumen
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ─── PASO 0: DATOS GENERALES ─── -->
+  <div class="section active" id="sec-0">
+    <div class="section-header">
+      <span class="scope-badge badge-0">Paso 1</span>
+      <div>
+        <h2>Datos de la organización</h2>
+        <p>Información general del inventario y período de reporte.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8L6 7h12l-2-4z"/></svg>
+        Identificación
+      </div>
+      <div class="form-grid">
+        <div class="field span-2">
+          <label>Razón social <span>*</span></label>
+          <input type="text" id="empresa" placeholder="Ej: Aceros del Sur S.A.">
+        </div>
+        <div class="field">
+          <label>CUIT / Identificación fiscal</label>
+          <input type="text" id="cuit" placeholder="XX-XXXXXXXX-X">
+        </div>
+        <div class="field">
+          <label>Sector / Industria <span>*</span></label>
+          <select id="sector">
+            <option value="">Seleccionar...</option>
+            <option>Agropecuario</option>
+            <option>Alimentos y bebidas</option>
+            <option>Comercio</option>
+            <option>Construcción</option>
+            <option>Educación</option>
+            <option>Energía</option>
+            <option>Industria manufacturera</option>
+            <option>Logística y transporte</option>
+            <option>Minería</option>
+            <option>Salud</option>
+            <option>Servicios financieros</option>
+            <option>Tecnología</option>
+            <option>Turismo y hotelería</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>País</label>
+          <input type="text" id="pais" value="Argentina">
+        </div>
+        <div class="field">
+          <label>Provincia / Estado</label>
+          <input type="text" id="provincia" placeholder="Ej: Buenos Aires">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Período de reporte
+      </div>
+      <div class="form-grid cols-3">
+        <div class="field">
+          <label>Año de reporte <span>*</span></label>
+          <select id="anio">
+            <option selected>2025</option>
+            <option>2024</option>
+            <option>2023</option>
+            <option>2022</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Fecha de inicio</label>
+          <input type="date" id="fecha_ini">
+        </div>
+        <div class="field">
+          <label>Fecha de cierre</label>
+          <input type="date" id="fecha_fin">
+        </div>
+        <div class="field">
+          <label>Estándar utilizado</label>
+          <select id="estandar">
+            <option>GHG Protocol Corporate Standard</option>
+            <option>ISO 14064-1</option>
+            <option>TCFD</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Enfoque de consolidación</label>
+          <select id="enfoque">
+            <option>Control operacional</option>
+            <option>Control financiero</option>
+            <option>Participación accionaria</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Responsable del inventario</label>
+          <input type="text" id="responsable" placeholder="Nombre y cargo">
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <div></div>
+      <button class="btn-nav btn-next" onclick="goTo(1)">Alcance 1</button>
+    </div>
+  </div>
+
+  <!-- ─── PASO 1: ALCANCE 1 ─── -->
+  <div class="section" id="sec-1">
+    <div class="section-header">
+      <span class="scope-badge badge-1">Alcance 1</span>
+      <div>
+        <h2>Emisiones directas</h2>
+        <p>Fuentes propias o controladas: combustión estacionaria y móvil, procesos industriales, emisiones fugitivas.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>¿Qué incluye?</strong> Calderas, hornos, generadores, vehículos propios, emisiones de proceso (cemento, acero, químicos), fugas de refrigerantes y SF₆.
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔥 Combustión estacionaria <span class="card-subtitle">Calderas · Hornos · Generadores · Turbinas</span></div>
+      <div class="repeat-header cols-5">
+        <span>Fuente / equipo</span><span>Combustible</span><span>Unidad</span><span>Cantidad</span><span></span>
+      </div>
+      <div id="estac-rows"></div>
+      <button class="btn-add" onclick="addRow('estac')">+ Agregar fuente</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🚛 Combustión móvil <span class="card-subtitle">Vehículos y maquinaria propios</span></div>
+      <div id="movil-rows"></div>
+      <button class="btn-add" onclick="addRow('movil')">+ Agregar vehículo / equipo</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚗️ Emisiones de proceso <span class="card-subtitle">Reacciones químicas, calcinación, fermentación, etc.</span></div>
+      <div id="proceso-rows"></div>
+      <button class="btn-add" onclick="addRow('proceso')">+ Agregar proceso</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💨 Emisiones fugitivas <span class="card-subtitle">Refrigerantes · Gas natural · SF₆ · CH₄</span></div>
+      <div id="fugit-rows"></div>
+      <button class="btn-add" onclick="addRow('fugit')">+ Agregar fuente fugitiva</button>
+    </div>
+
+    <div class="nav-bar">
+      <button class="btn-nav btn-prev" onclick="goTo(0)">← Atrás</button>
+      <button class="btn-nav btn-next" onclick="goTo(2)">Alcance 2</button>
+    </div>
+  </div>
+
+  <!-- ─── PASO 2: ALCANCE 2 ─── -->
+  <div class="section" id="sec-2">
+    <div class="section-header">
+      <span class="scope-badge badge-2">Alcance 2</span>
+      <div>
+        <h2>Emisiones indirectas — energía</h2>
+        <p>Generación de electricidad, calor o vapor comprado a terceros.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Método de mercado vs. ubicación:</strong> Si contás con contratos de energía renovable (PPAs, certificados I-REC/RECs), podés reportar ambos métodos.
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚡ Electricidad adquirida</div>
+      <div id="elec-rows"></div>
+      <button class="btn-add" onclick="addRow('elec')">+ Agregar instalación</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">♨️ Calor y vapor adquirido</div>
+      <div id="calor-rows"></div>
+      <button class="btn-add" onclick="addRow('calor')">+ Agregar fuente</button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Método de mercado — certificados y contratos</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>¿Tiene contratos de energía renovable (PPA)?</label>
+          <select id="ppa">
+            <option value="no">No</option>
+            <option value="si">Sí</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>% de energía renovable certificada</label>
+          <input type="number" id="pct_renovable" placeholder="0" min="0" max="100">
+        </div>
+        <div class="field span-2">
+          <label>Tipo de certificado / acreditación</label>
+          <input type="text" id="certificado" placeholder="Ej: I-REC, MATER, contrato bilateral">
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <button class="btn-nav btn-prev" onclick="goTo(1)">← Atrás</button>
+      <button class="btn-nav btn-next" onclick="goTo(3)">Alcance 3</button>
+    </div>
+  </div>
+
+  <!-- ─── PASO 3: ALCANCE 3 ─── -->
+  <div class="section" id="sec-3">
+    <div class="section-header">
+      <span class="scope-badge badge-3">Alcance 3</span>
+      <div>
+        <h2>Otras emisiones indirectas</h2>
+        <p>Cadena de valor: categorías aguas arriba y aguas abajo según el Protocolo GHG.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>Completá las categorías que aplican a tu organización.</strong> No es necesario que todas sean relevantes.
+    </div>
+
+    <div class="card">
+      <div class="card-title">⬆️ Categorías aguas arriba</div>
+
+      {% for cat, label in [
+        ('c1', 'Cat. 1 — Bienes y servicios adquiridos'),
+        ('c2', 'Cat. 2 — Bienes de capital'),
+        ('c3', 'Cat. 3 — Actividades relacionadas con energía'),
+        ('c4', 'Cat. 4 — Transporte y distribución (aguas arriba)'),
+        ('c5', 'Cat. 5 — Residuos generados en operaciones')
+      ] %}
+      <div class="field cat-group">
+        <label>{{ label }}</label>
+        <div class="form-grid cols-3" style="margin-top:6px">
+          <input type="number" placeholder="tCO₂eq estimadas" id="{{ cat }}_val">
+          <select id="{{ cat }}_metodo">
+            <option value="">Método de estimación</option>
+            <option>Basado en gasto (spend-based)</option>
+            <option>Basado en actividad</option>
+            <option>Basado en proveedor</option>
+            <option>No aplica</option>
+          </select>
+          <input type="text" placeholder="Comentario" id="{{ cat }}_nota">
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="field cat-group">
+        <label>Cat. 6 — Viajes de negocios</label>
+        <div id="viajes-rows"></div>
+        <button class="btn-add" onclick="addRow('viajes')">+ Agregar trayecto</button>
+      </div>
+
+      <div class="field cat-group">
+        <label>Cat. 7 — Desplazamiento de empleados (home-work)</label>
+        <div class="form-grid cols-3" style="margin-top:6px">
+          <input type="number" placeholder="Nº empleados" id="c7_emp">
+          <input type="number" placeholder="Km promedio diario p/empleado" id="c7_km">
+          <select id="c7_medio">
+            <option value="">Medio predominante</option>
+            <option>Auto particular</option>
+            <option>Transporte público</option>
+            <option>Remis / taxi</option>
+            <option>Mixto</option>
+            <option>No aplica</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⬇️ Categorías aguas abajo</div>
+
+      {% for cat, label in [
+        ('c9', 'Cat. 9 — Transporte y distribución (aguas abajo)'),
+        ('c10', 'Cat. 10 — Procesamiento de productos vendidos'),
+        ('c11', 'Cat. 11 — Uso de productos vendidos'),
+        ('c12', 'Cat. 12 — Tratamiento al fin de vida de productos vendidos')
+      ] %}
+      <div class="field cat-group">
+        <label>{{ label }}</label>
+        <div class="form-grid cols-3" style="margin-top:6px">
+          <input type="number" placeholder="tCO₂eq estimadas" id="{{ cat }}_val">
+          <select id="{{ cat }}_metodo">
+            <option value="">Método</option>
+            <option>Basado en actividad</option>
+            <option>Basado en distancia</option>
+            <option>Basado en gasto</option>
+            <option>No aplica</option>
+          </select>
+          <input type="text" placeholder="Comentario" id="{{ cat }}_nota">
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="field cat-group">
+        <label>Observaciones generales / fuentes de datos Alcance 3</label>
+        <textarea id="obs_a3" placeholder="Describí las fuentes de datos, metodologías empleadas, exclusiones justificadas..."></textarea>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <button class="btn-nav btn-prev" onclick="goTo(2)">← Atrás</button>
+      <button class="btn-nav btn-next" onclick="goTo(4)">Resumen →</button>
+    </div>
+  </div>
+
+  <!-- ─── PASO 4: RESUMEN ─── -->
+  <div class="section" id="sec-4">
+    <div class="section-header">
+      <span class="scope-badge badge-0">Paso 5</span>
+      <div>
+        <h2>Resumen y declaración</h2>
+        <p>Revisá los totales y completá la información del declarante antes de generar el informe PDF.</p>
+      </div>
+    </div>
+
+    <div class="summary-grid" id="summary-cards"></div>
+
+    <div id="summary-table-wrap"></div>
+
+    <div class="card">
+      <div class="card-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Declaración del responsable del inventario
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Nombre completo del declarante <span>*</span></label>
+          <input type="text" id="decl_nombre" placeholder="Nombre y apellido">
+        </div>
+        <div class="field">
+          <label>Cargo <span>*</span></label>
+          <input type="text" id="decl_cargo" placeholder="Ej: Director/a de Sostenibilidad">
+        </div>
+        <div class="field span-2">
+          <label>Notas adicionales</label>
+          <textarea id="decl_notas" placeholder="Aclaraciones, limitaciones del inventario, verificaciones externas..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <button class="btn-nav btn-prev" onclick="goTo(3)">← Atrás</button>
+      <button class="btn-nav btn-submit" onclick="generarPDF()" id="btn-pdf">
+        <span id="btn-pdf-text">⬇ Generar informe PDF</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
